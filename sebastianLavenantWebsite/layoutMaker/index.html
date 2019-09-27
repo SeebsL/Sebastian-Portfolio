@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!-- Sebastian Lavenant -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Layout Maker</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+
+  <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+    body, html{
+      font-size: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      height: 100%;
+      width: 100%
+    }
+
+    header{
+      text-align: center;
+    }
+
+    #top {
+      height: 40%;
+      display: flex;
+      flex-flow: row;
+      justify-content: space-around;
+
+    }
+
+
+    #layout_demo {
+      position: relative;
+      margin-top: 1%;
+      width: 100%;
+      height: 100%;
+
+
+      border: solid 1px black;
+    }
+    /* ---------- forms -------*/
+    button {
+      display: block;
+      margin: 5px 2px;
+    }
+    #buttons{
+      height: 10%;
+      width: 20%;
+      padding: 1%;
+      margin-left: 40%;
+      display: flex;
+      flex-flow: row ;
+      align-items: center;
+      border: solid 1px black;
+    }
+
+    ul {
+      list-style: none;
+    }
+    label {
+      font-weight: bold;
+    }
+    /* generic styles for demo containers */
+
+    #layout_demo div {
+      background-color: blue;
+
+      outline: solid 1px black;
+    }
+
+    #layout_demo p {
+      background-color: green;
+
+      outline: solid 1px black;
+    }
+
+    #layout_demo section {
+      background-color: pink;
+      outline: solid 1px black;
+    }
+           /* error Messages */
+    .errorInput::after, .errorOption::after {
+      content: " \25BA Enter a value";
+      color: red;
+      font-weight: bold;
+      font-size: 22px;
+      font-family: "Liberation Serif", Serif;
+
+    }
+    .errorOption::after {
+      content: " \25BA Select an option "
+    }
+
+    .hide {
+      display: none;
+    }
+
+  </style>
+
+  <script>
+    $(document).ready( function(){
+        //----- container <select> variables
+        var containerSelect = $('#container');
+        var containType = $('#container').val();
+        // string containing markup of new container
+        var conTypeStr = ` <${containType}> This is a ${containType} </${containType}> `;
+        //------dimensions variables
+
+        //----initialize reference for delete button
+        var latestContainer;
+        var i;
+        // must be true to execute caller function
+        var valid = true;
+
+        // function to check valid input
+        function checkForm(){
+
+            // reset valid
+            valid = true;
+            // check radio fields
+
+            if( $('input[name="unitWidth"]:checked').length == 0 ){
+                $('#unitWidth').addClass('errorOption');
+                valid = false;
+            }
+            else {
+                $('#unitWidth').removeClass('errorOption');
+            }
+            if( $('input[name="unitHeight"]:checked').length == 0){
+                $('#unitHeight').addClass('errorOption');
+                valid = false;
+            }
+            else {
+                $('#unitHeight').removeClass("errorOption");
+            }
+
+        } // end check form
+        function createContainer() {
+            // check form
+            checkForm();
+            if( valid == false){
+
+                return
+            }
+
+            if( valid === true) {
+
+                var width = $('#inputWidth').val();
+                var height = $('#inputHeight').val();
+                var widthUnit = $('input[name="unitWidth"]:checked').val();
+                //alert(widthUnit);
+                var heightUnit = $('input[name="unitHeight"]:checked').val();
+                //alert( width);
+                //alert( height);
+                var displaySelect = $('#display').val();
+                //alert(displaySelect);
+                var positionSelect = $('#position').val();
+                //alert(positionSelect);
+
+               // ----------- absolute position inputs --------
+                var absTop = $('#inputTop').val();
+                var absBottom = $('#inputBottom').val();
+                var absLeft = $('#inputLeft').val() ;
+                var absRight = $('#inputRight').val() ;
+
+                    $('#layout_demo').append(conTypeStr);
+
+                    i = $(`${containType}`).length;
+                    //alert(i);
+                    latestContainer = $($(`${containType}`)[i - 1]);
+                    //alert(latestContainer)
+
+                    latestContainer.css({
+                        "width": `${width}${widthUnit}`,
+                        "height": `${height}${heightUnit}`,
+                        "display": `${displaySelect}`,
+                        "position": `${positionSelect}`
+                    });
+
+                if( positionSelect === "absolute"){
+                    latestContainer.css({
+                        "top": `${absTop}px`,
+                        "bottom": `${absBottom}px`,
+                        "left": `${absLeft}px`,
+                        "right": `${absRight}px`
+                    });
+
+
+                } // end if( absolute )
+
+
+            } // end if
+
+        } // end createContainer()
+
+
+        //apply plugin
+        $('.spin').spinner();
+
+        // ---------------------------- event handlers ---------------------
+        $('#btn').click( createContainer );
+        // button to delete latest element or selected element
+        $('#delete').click( function(){
+            latestContainer.remove();
+        }); // end delete
+        // clear all new elements and values in form
+        $('#clearForm').click( function(){
+            location.reload();
+        });
+
+        $('select').change( function(){
+            containType = $('#container').val();
+            //alert(containType);
+            // apply new container value to string
+            conTypeStr = "<" + containType + "> This is a " + containType + " </" + containType + "> ";
+            //alert( conTypeStr)
+            displaySelect = $('#display').val();
+            positionSelect = $('#position').val();
+            // options for absolute position
+            if( positionSelect == 'absolute' ){
+                $('#absoluteOptions').show();
+            }
+            else {
+                $('#absoluteOptions').hide();
+            }
+
+        }); // end selector.change() event
+
+    }); // end ready
+
+  </script>
+
+</head>
+
+<body>
+
+<header>
+<h1> Welcome to Layout Maker </h1>
+        <!-- Give word "imagine" a rainbow linear gradient -->
+<p> Use this tool to experiment with making and positioning elements</p>
+<p> Enjoy the convenience and dynamics of jQuery and jQuery Plugins </p>
+</header>
+  <!-- Create another form to edit existing elements -->
+<div id="top">
+
+<div id="form_dim">
+  <h2> <u> Dimensions </u> </h2>
+  <label for="container"> Please select type of container to add </label>
+  <select id= "container">
+    <option value= "div"> &ltdiv&gt </option>
+    <option value= "p"> &ltp&gt </option>
+    <option value= "section"> &ltsection&gt </option>
+
+  </select>
+
+  <br>
+  <br>
+
+<section>
+<span id="width">
+  <label for= "inputWidth"> Input a width </label>
+  <input id= "inputWidth" class="spin" placeholder="Default">
+</span>
+<br>
+  <span id="unitWidth">
+    <label for="radioWidth"> Choose a unit: </label>
+  <input id="radioWidth" type="radio" name="unitWidth" value="px" >
+  px
+  <input type="radio" name="unitWidth" value="em" >
+  em
+  <input type="radio" name="unitWidth" value="%" >
+  %
+  </span>
+</section>
+  <br>
+  <br>
+
+<section>
+<span id="height">
+<label for= "inputHeight"> Input a height</label>
+  <input id= "inputHeight" class="spin" placeholder=" Default">
+</span>
+  <br>
+  <br>
+  <span id="unitHeight">
+  <label for="radioHeight"> Choose a unit: </label>
+  <input id="radioHeight" type="radio" name="unitHeight" value="px" >
+  px
+  <input type="radio" name="unitHeight" value="em" >
+  em
+  <input type="radio" name="unitHeight" value="%" >
+  %
+  </span>
+</section>
+</div> <!-- end form_dim -->
+
+<section id="form_lay">
+  <h2> <u>layout</u> </h2>
+
+  <label for="display"> Display:</label>
+  <select id="display">
+    <option value="auto"> Auto </option>
+    <option value="block"> Block</option>
+    <option value="inline"> Inline</option>
+    <option value="inline-block"> Inline-block</option>
+    <!-----  <option value="flex"> Flex-item</option> ----->
+  </select>
+
+  <label for="position"> Position: </label>
+  <select id="position">
+    <option value="static"> Static </option>
+    <option value="absolute"> Absolute </option>
+    <option value="fixed"> Fixed</option>
+    <option value="sticky"> Sticky </option>
+  </select>
+
+  <div id="add.Options">
+    <br>
+    <section id="absoluteOptions" class=" hide" >
+      <!-------======== select for absolute position =========-------->
+      <label for= "inputTop"> Select Top displacment</label>
+      <input id= "inputTop" class="spin" placeholder=" Default">
+      <br>
+      <br>
+      <label for= "inputBottom"> Select Bottom displacment</label>
+      <input id= "inputBottom" class="spin" placeholder=" Default">
+      <br>
+      <br>
+      <label for= "inputLeft"> Select Left displacment</label>
+      <input id= "inputLeft" class="spin" placeholder=" none ">
+      <br>
+      <br>
+      <label for= "inputRight"> Select Right displacment</label>
+      <input id= "inputRight" class="spin" placeholder=" none">
+
+    </section>
+
+    <section id="flexOptions" class="hide">
+
+      <label for="flex-JustifyContent"> justify-content: </label>
+      <select id="flex-JustifyContent">
+
+        <option value="start"> start </option>
+        <option value="end"> end </option>
+        <option value="center"> center </option>
+        <option value="space-around"> space-around </option>
+        <option value="space-between"> space-between </option>
+
+      </select>
+
+    </section>
+
+  </div>
+
+</section>
+
+</div> <!-- end "Top" div -->
+<h3 style=" margin-bottom: 1%; margin-left: 45%; "> Create Element </h3>
+<div id="buttons">
+  <button id="btn" > Create Container </button>
+  <button id="delete"> Delete most recent</button>
+  <button id="clearForm"> Reset </button>
+</div>
+
+<div id="layout_demo">
+  <!-- JS created elements in here -->
+
+</div>
+
+</body>
+</html>

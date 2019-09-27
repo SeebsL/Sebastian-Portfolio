@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Sebastian Lavenant</title>
+  <link href="https://fonts.googleapis.com/css?family=Hepta+Slab|Inconsolata|Playfair+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+
+</head>
+
+<style>
+  /*-------------generic styles----------- */
+*{
+  box-sizing: content-box;
+}
+  body,html {
+    height: 100%;
+    margin: 0;
+  }
+  abbr{
+    text-decoration: none;
+    border-bottom: dotted 2px black;
+    cursor: pointer;
+  }
+
+/*---------------------Grid container----------------------- */
+  #outer {
+    margin-left: 10px;
+    height: 100%;
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr 1fr 1fr;
+    grid-auto-rows: minmax(30px,auto) 1fr;
+    grid-template-areas: " header main main . ."
+                         " menu main main . ."  ;
+    grid-column-gap: 1em;
+    font-family: Inconsolata, Serif;
+  }
+
+
+  /* ----------------------Navigation(menu) -------------------- */
+          /* ----------- Links styles ------- */
+  #layout-maker-link:hover {
+    background-image: url(images/LMbg.JPG);
+    background-size: contain;
+  }
+
+  #animals-and-things-link:hover {
+    background-image: url(images/animalsNThingsbg.JPG);
+    background-size: contain;
+  }
+
+  #cs-report-link:hover {
+    background-image: url(images/csbg.JPG);
+    background-size: cover ;
+    background-repeat: no-repeat;
+    color: white;
+  }
+       /* ------------ End link styles -------- */
+
+  nav ul{
+    padding-left: 0px;
+    list-style: none;
+  }
+
+  nav ul li {
+    text-align: center;
+    border-top: solid 2px black;
+
+  }
+
+  nav a {
+    font-size: 20px;
+    display:block;
+    padding: 20px;
+    cursor: pointer;
+  }
+
+  nav a:hover {
+    background-color: whitesmoke;
+  }
+
+  nav ul:last-child {
+    border-bottom: solid 2px black;
+  }
+
+  /* --------------Grid Items------------ */
+/*
+  #outer div:nth-of-type(even){
+    background-color: wheat;
+  }
+
+  #outer div {
+    background-color: whitesmoke;
+    padding: 1em;
+
+  }
+  */
+
+  #left {
+    text-align: center;
+    grid-area: header;
+    align-self: start;
+    border-radius: 5px;
+    padding: 0px;
+    margin:0px;
+  }
+
+
+  #name{
+    position: sticky;
+    top: 0px;
+    text-align: center;
+    font-family: Fairplay Display, Serif;
+    font-weight: normal;
+    font-size: 50px;
+    border: solid 1px black;
+    box-shadow: 0px 1px 3px black;
+  }
+
+  #right {
+    position: relative;
+    grid-area:main;
+    font-size: 20px;
+  }
+
+  #right > p:first-of-type {
+    padding: 5px;
+    border-bottom: double 3px black;
+    border-top: double 3px black;
+    line-height: 23px;
+  }
+
+  #hand {
+   position: absolute;
+  }
+
+  .resume-div {
+    display: none;
+  }
+
+/* Accordion styles */
+
+  #accordion {
+    text-align: center;
+
+  }
+
+  #accordion h3 {
+    border: solid 2px black;
+    cursor: pointer;
+  }
+
+  .box-2{
+    grid-column: 2/span 2;
+  }
+
+
+  .box-3 {
+    grid-column: 4/ span 2
+  }
+
+  .menu-box {
+    grid-area: menu;
+    grid-row: 2/span 1;
+    justify-self: stretch;
+  }
+
+</style>
+
+<script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"> </script>
+
+<script
+    src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+    crossorigin="anonymous"></script>
+
+<script>
+
+$(window).ready( function(){
+    // initialize accordion widget
+    $('#accordion').accordion({
+        heightStyle: "content",
+        collapsible: true,
+        active: false
+});
+
+
+
+    // Create array with iframe targets for links
+    var projectIframes = new Array();
+    projectIframes = [ "<iframe src=\" layoutMaker/index.html\" height=\"645\" width=\"1075\"></iframe>\n" ,"<iframe src=\"animalsNThings/index.html\" height=\"645\" width=\"1075\"></iframe>\n", "<iframe src=\" CSReport/index.html\" height=\"645\" width=\"1075\"></iframe>\n", "<iframe src=\"\" height=\"645\" width=\"1000\"></iframe>\n"]
+    //check is intro-p is displayed ( should not be if any link is open
+    var introP = $("#intro-p").css("display");
+
+    // clear iframe container before inserting new iframe
+    function clearContainer() {
+        $('.resume-div').hide();
+        $("#iframe-container").children().remove();
+
+    } // end checkPresence()
+
+    // event handlers for navigation links
+    $('#name').click(function(){
+        $('iframe').remove();
+        $('.resume-div').hide();
+        $('.intro').show();
+
+    }); // end #name.click()
+    $('#portfolio-link').click(function(){
+        $('iframe').remove();
+        $('.intro').hide();
+        $('.resume-div').show();
+    }); // end portfolio-link
+
+    $('#layout-maker-link').click(function(){
+       clearContainer();
+        $('.intro,.resume-div').hide();
+        $("#iframe-container").append(projectIframes[0]);
+    }); // end layout-maker-link
+
+    $('#animals-and-things-link').click(function(){
+        clearContainer();
+        $('.intro,.resume-div').hide();
+        $("#iframe-container").append(projectIframes[1]);
+    }); // end animalsNThings
+
+    $('#cs-report-link').click(function(){
+        clearContainer();
+        $('.intro,.resume-div').hide();
+        $("#iframe-container").append(projectIframes[2]);
+    }); // end cs-report-link
+
+}); // end ready()
+</script>
+
+<body>
+
+<div id="outer" >
+  
+  <div id="left" class="grid-all box-1">
+    <h1 id="name"> Sebastian Lavenant </h1>
+  </div>
+
+  <div id="right" class="grid-all box-2">
+
+    <p id="intro-p" class="intro">
+      Sebastian is from Chula Vista,CA,USA. He is a thoughtful and creative person.
+      He dedicates most of his time pursuing a Bachelors degree in Sociology at the University of California, Merced and learning about Web-Development.
+      On his off time he enjoys <abbr title="Soccer, Weight lifitng, Calisthenics"> <b>physical activities</b></abbr>, <abbr title="Total War: Empire, Battlefield 3"><b> Video Games</b> </abbr> , and<abbr title="A Song of Ice and Fire, The Inheritance Cycle, Elementary Forms of Religion, Everything is F**ked" > <b>Reading</b></abbr> to name a few things.
+    </p>
+
+    <aside class="intro" style="text-align: center"> Feel welcome to browse his portfolio and resume information.</aside>
+    <p id="hand" class="far fa-hand-point-left fa-4x"></p>
+
+      <!-- accordion widget -->
+      <div id="accordion" class="resume-div">
+
+        <h3><u><strong>Academics</strong></u></h3>
+        <div>
+          <p class="western"><span style="font-size: large;"><strong>-</strong></span><span style="font-size: large;"> High school Diploma (class of 2015)</span></p>
+          <p class="western">&nbsp;</p>
+          <p class="western"><span style="font-size: large;"><strong>-</strong></span><span style="font-size: large;"> Sociology B.A. in progress, </span><span style="font-size: large;"><strong>University of California, Merced, 5</strong></span><sup><span style="font-size: large;"><strong>th</strong></span></sup><span style="font-size: large;"><strong> Year</strong></span></p>
+
+          <p class="western"><span style="font-size: x-large;"><u><strong>Relevant Classes</strong></u></span></p>
+
+          <p class="western"><span style="font-size: large;"><strong>Intermediate HTML and CSS, San Diego Mesa College, </strong></span><span style="font-size: large;">Grade: B </span></p>
+          <p class="western"><span style="font-size: large;">: - CSS : Descendent selectors, Pseudo-selectors, Pseudo-elements, Positioning( Normal Flow, Absolute, Relative, Fixed, Flex, Grid), Responsive Web-design, Icons, Fonts, Images</span></p>
+          <p class="western">&nbsp;</p>
+          <p class="western"><span style="font-size: large;"><strong>Javascript for Web-Development, San Diego Mesa College, </strong></span><span style="font-size: large;">Grade: B </span></p>
+          <p class="western"><span style="font-size: large;">: Intro to basic JS( variables, Loops, If's, Array, DOM accesibility), native Objects( e.g. Date()),Form-checking, CSS and DOM manipulation, Animations, Effects, jQuery( equivalent of previous items), jQuery Plugins.</span></p>
+
+          <p class="western"><span style="font-size: x-large;"><u><strong>Relevant Skills</strong></u></span></p>
+          <p class="western"><span style="font-size: large;"> - <b>Learner Mindset:</b> While I rely on my knowledge to do a task, I am open-minded toward suggestions for improvment and other ideas. I seek to improve what I have already completed and I value mistakes because I know I can learn to correct them.</span></p>
+          <p class="western"><span style="font-size: large;"> - <b>Thorough:</b> I strive to make sure every aspect of a project is working properly, even if it means trying several approaches to make that happen.</span></p>
+
+
+
+        </div>
+
+        <h3><u><strong>Job History</strong></u></h3>
+        <div>
+          <p class="western">&nbsp;</p>
+          <p class="western"><span style="font-family: Times New Roman, serif;"><span style="font-size: large;"><strong>Sales Representative</strong></span></span><span style="font-family: Times New Roman, serif;"><span style="font-size: large;">, Vector Marketing Co., Chula Vista, CA </span></span><span style="font-family: Times New Roman, serif;"><span style="font-size: large;"><strong> 07/08/17-08/17/17</strong></span></span></p>
+          <p class="western"><span style="font-family: Times New Roman, serif;"><span style="font-size: large;"><strong>:</strong></span></span><span style="font-family: Times New Roman, serif;"><span style="font-size: large;"> Personally</span></span><span style="font-family: Times New Roman, serif;"><span style="font-size: large;"> phone called over 70 potential clients, scheduled appointments, presented product to customers, and closed sales.</span></span></p>
+          <p class="western">&nbsp;</p>
+          <p class="western"><span style="font-size: large;"><strong>Student Food Worker, </strong></span><span style="font-size: large;">Pavilion Dining Center, Merced, CA</span><span style="font-size: large;"><strong>: 08/22/18</strong></span><span style="font-family: Times New Roman, serif;"><span style="font-size: large;">-</span></span><span style="font-family: Times New Roman, serif;"><span style="font-size: large;"><strong>12/07/18</strong></span></span></p>
+          <p class="western"><span style="font-size: large;">Regularly rotated between positions including: </span></p>
+          <ul>
+            <li>
+              <p class="western"><span style="font-size: large;">Cashier</span></p>
+            </li>
+            <li>
+              <p class="western"><span style="font-size: large;">Food Server: Burritos, bowls, pizza, burgers</span></p>
+            </li>
+            <li>
+              <p class="western"><span style="font-size: large;">Dish washing: 3-compartment sinks, and machine washing</span></p>
+            </li>
+            <li>
+              <p class="western"><span style="font-size: large;">Table busing: Use of sanitizing, de-greasing, and polishing chemicals</span></p>
+            </li>
+            <li>
+              <p class="western"><span style="font-size: large;">Custodial: Trash, mopping</span></p>
+            </li>
+          </ul>
+          <p class="western">&nbsp;</p>
+          <p class="western" align="left"><span style="font-size: large;"><strong>Maintenance Worker, </strong></span><span style="font-size: large;">McDonald's, National City, CA </span><span style="font-size: large;"><strong>: 07/27/18</strong></span><span style="font-family: Times New Roman, serif;"><span style="font-size: large;"><strong>-08/20/18</strong></span></span></p>
+          <ul>
+            <li>
+              <p class="western" align="left"><span style="font-size: large;">4am starts</span></p>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <p class="western"><span style="font-size: large;">Sweeping, mopping, windows, busing, trash</span></p>
+            </li>
+            <li>
+              <p class="western"><span style="font-size: large;">Restroom clean and sanitation</span></p>
+            </li>
+            <li>
+              <p class="western"><span style="font-size: large;">Change or filtration of oil from deep-fryers using filter machine. </span></p>
+            </li>
+          </ul>
+          <p class="western">&nbsp;</p>
+          <p class="western" align="left"><span style="font-size: large;"><strong>Assistant, </strong></span><span style="font-size: large;">Teriyaki Grill, Chula Vista, CA : </span><span style="font-size: large;"><strong>02/05/19 - present</strong></span></p>
+          <ul>
+            <li>
+              <p class="western"><span style="font-size: large;">Dishwashing, 3-compartment sink</span></p>
+            </li>
+            <li>
+              <p class="western"><span style="font-size: large;">Waiter, bussing</span></p>
+            </li>
+            <li>
+              <p class="western"><span style="font-size: large;">prepping vegetables and proteins</span></p>
+            </li>
+          </ul>
+          <p class="western">&nbsp;</p>
+        </div>
+
+        <h3><u><strong>Languages </strong></u></h3>
+        <div>
+          <p class="western"><span style="font-size: x-large;">-</span><span style="font-size: large;"> Spanish</span></p>
+          <p class="western"><span style="font-size: large;"><strong>- </strong></span><span style="font-size: large;">English</span></p>
+          <p class="western">&nbsp;</p>
+          <p class="western"><span style="font-size: x-large;"><u><strong>Certificates/Licenses</strong></u></span></p>
+          <p class="western"><span style="font-size: x-large;">- </span><span style="font-size: large;">Valid California Driver's License (presentable upon request)</span></p>
+          <p class="western">&nbsp;</p>
+          <p class="western"><span style="font-size: large;">-CPR Certification (Presentable upon request)</span></p>
+        </div>
+
+
+    </div>
+
+    <div id="iframe-container"> </div>
+
+  </div>
+
+  <div id="end" class="grid-all box-3">
+
+  </div>
+
+  <div id="menu" class="grid-all box-4 menu-box">
+
+    <nav>
+
+      <ul>
+        <li> <a id="portfolio-link"> Resume Details </a> </li>
+        <li> <a id="layout-maker-link"> Layout Maker </a> </li>
+        <li> <a id="animals-and-things-link"> Animals and Things </a> </li>
+        <li> <a id="cs-report-link"> The CS Report </a> </li>
+      </ul>
+
+    </nav>
+
+  </div>
+
+</div>
+
+</body>
+</html>

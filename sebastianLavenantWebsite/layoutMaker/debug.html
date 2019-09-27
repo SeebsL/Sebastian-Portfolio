@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Debugg</title>
+
+  <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+
+  <script>
+      $(document).ready( function(){
+
+          // event-handler to create new element
+          function createContainer() {
+
+              // variables store values from <select> element
+              var elementType = $('select').val();
+
+              // string containing markup for use with .append()
+              var elementTypeStr = $(` <${elementType}> This is a ${elementType} </${elementType}> `);
+
+              $('#layout_demo').append( elementTypeStr );
+              elementTypeStr.css({"background-color":" blue" , "height": "100px"});
+
+          } // end createContainer()
+
+          // ---------------------------- event handlers ---------------------
+
+          $('#btn').click( createContainer );
+          // button to delete latest element or selected element
+
+      }); // end ready
+
+  </script>
+</head>
+<body>
+
+<section id="form">
+  <!-- select element --->
+  <label for="container"> Please select type of container to add</label>
+  <select id= "container">
+    <option value= "div" > &ltdiv&gt </option>
+    <option value= "p"> &ltp&gt </option>
+    <option value= "section"> &ltsection&gt </option>
+
+  </select>
+  <!-- Seperate container to hold now elements -->
+
+  <button id="btn" > Create Container </button>
+</section>
+
+<div id="layout_demo">
+
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<!-- Sebastian Lavenant -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> Animals 'n Stuff </title>
+  <link href="https://fonts.googleapis.com/css?family=Bangers|Carter+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="index.css">
+<style>
+
+  html {
+    width: 100%;
+
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    display: block;
+    width: 760px;
+    height: 180px;
+    margin-left: 175px;
+  }
+
+  main {
+    background-image: url(images/index_hero2.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 656px ;
+    width: 1366px;
+    background-color: #ffe67f;
+  }
+  h1 {
+    display:block;
+    margin-bottom: 10px;
+    text-align: left;
+    color: #a497b3;
+    text-shadow: 2px 1px 1px rgb(220, 195, 110);
+    background-image: linear-gradient( #FFF5A7, rgba(255, 230, 127, 0.77), transparent);
+    border-radius: 5px;
+  }
+  h3 {
+    /* shorten container to make text multi-line */
+    margin-left: 235px;
+    margin-right: 0;
+    margin-top: 0;
+    display: block;
+    font-size: 25px;
+    text-align: right;
+    color: #a497b3;
+    border-radius: 5px;
+    text-shadow: 5px 5px 5px #ffe67f;
+    background-image: linear-gradient(rgb(255, 230, 127), #FFF5A7);
+  }
+
+    /* nav */
+  nav {
+    margin-left: 470px;
+
+  }
+
+    nav ul li {
+      display: block;
+      padding: 5px;
+      font-size: 60px;
+      color: #858681;
+      text-decoration: underline;
+      cursor: default;
+      text-shadow: 2px 2px 2px black;
+
+    }
+
+  nav ul li:first-of-type ul {
+    display: none;
+  }
+
+  nav ul li:first-of-type:hover ul {
+     display: flex;
+     flex-flow: column ;
+   }
+/* remove padding on dropdown menu */
+  nav ul li:first-of-type ul li {
+    padding: 0px;
+    margin-left: 70px;
+
+  }
+
+  a {
+    display: block;
+    padding: 0px 5px;
+    color: #858681
+            }
+
+  a:hover {
+    background-image: linear-gradient( to right, #b5a6c1,#cecece,rgb(255, 230, 127), #FFF5A7, rgba(255, 255, 255, 0.05) ) ;
+    color: #858681;
+    text-shadow: none;
+    }
+
+  nav ul li:first-of-type ul a:hover{
+    background-color: rgba(255, 255, 255, 0);
+   background-image: linear-gradient( to right, #b5a6c1,#cecece,rgb(255, 230, 127), #FFF5A7, rgba(255, 255, 255, 0.05) ) ;
+  }
+  #lastA:hover {
+    background-color: rgba(255, 255, 255, 0);
+    background-image: linear-gradient(to right, #d8d8d8, rgb(255, 230, 127), #FFF5A7 ,  rgba(255, 255, 255, 0.05));
+  }
+
+  /* style for sub-nav when touch() event*/
+  .rwdNavTouchJS{
+    background-color: rgba(255, 255, 255, 0);
+    background-image: linear-gradient( to right, #b5a6c1,#cecece,rgb(255, 230, 127), #FFF5A7, rgba(255, 255, 255, 0.05) ) ;
+
+  }
+
+
+
+  /* attempt to make transparent container for shape-outside fail
+  h3:before {
+    display: block;
+    content: '';
+    width: 230px;
+    height: 350px;
+    background-color: transparent;
+    outline: solid 1px black;
+    float: left;
+
+    shape-outside: polygon( 190px 300px, 180px 200px, 170px 100px        );
+
+  }
+*/
+  /* RWD media queries */
+
+
+
+  @media only screen and ( max-width: 1024px) {
+    /* resize content from fixed sizes to %'s */
+    /* using (target/context)*100 = result */
+
+    body {
+      /* background-color: green; */
+    }
+
+    header {
+      display: block;
+      width: 75%;
+      height: 27%;
+      margin-left: 12%;
+    }
+
+    main {
+      height: 100%;
+      width: 100%;
+      background-origin: border-box;
+      background-position: -160px;
+    }
+
+    h1 {
+      width: 100%;
+      margin-bottom: 1%;
+      background-origin: border-box;
+      margin-left: 16%;
+    }
+
+    h3 {
+      /* shorten container to make text multi-line */
+      margin-left: 30%;
+      margin-top: 0;
+      display: block;
+      font-size: 25px;
+      text-align: right;
+      color: #a497b3;
+      border-radius: 5px;
+      text-shadow: 5px 5px 5px #ffe67f;
+      background-image: linear-gradient(rgb(255, 230, 127), #FFF5A7);
+    }
+
+    /* nav */
+    nav {
+      margin-left: 40%;
+    }
+
+
+    nav a {
+      display: block;
+      flex-shrink: 2;
+    }
+    nav li {
+      padding: 0px;
+      flex-shrink: 2;
+
+    }
+
+  } /* end  @media 1240px */
+
+  @media only screen and ( max-width: 1075px){
+
+    header {
+      display: block;
+      width: 1000px;
+      height: 27%;
+    }
+
+    h3 {
+      width: 700px;
+      text-align: left ;
+      margin-left: 10%;
+      margin-right: 0;
+    }
+
+    main {
+      background-position: -160px;
+    }
+
+    nav {
+      display: block;
+      width: 45%;
+      margin-left: 22%;
+      margin-right: 0;
+    }
+
+  } /* end media query @1075 */
+
+  @media only screen and (max-width: 768px) {
+    body {
+      /* color: blue; */
+    }
+
+    main{
+      width: 100%;
+    }
+
+    h1 {
+      margin-left: 10%;
+      font-size: 50px;
+    }
+
+    nav{
+      margin-left: 35%;
+    }
+    nav ul li {
+      font-size: 50px;
+    }
+
+
+  } /* end @media 768px */
+
+  @media only screen and ( max-width: 600px) {
+
+    header{
+      margin-left: 23%;
+    }
+
+    nav{
+      margin-top: 10%;
+    }
+
+    nav ul {
+      flex-flow: column;
+      align-items: center;
+    }
+
+  } /* end @media 600px; */
+
+</style>
+
+  <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"> </script>
+
+  <script>
+    // same as the :hover in CSS, but to work with touch for rwd
+  $(document).ready( function(){
+      $('#navLink1').on("tap", function(){
+          $('nav ul li:first-of-type ul li').toggleClass("rwdNavTouchJs");
+      });//end ready()
+
+  }); // end ready()
+
+  </script>
+
+</head>
+<body>
+<main>
+
+<header>
+  <h1> Welcome to Animals 'n Things </h1>
+  <h3> Your one-stop shop for Animals and Things</h3>
+</header>
+
+  <nav>
+    <ul>
+
+      <li id="navLink1"> <span class="fas fa-bars" style="height: 20px; width: 20px; margin-right: 40px; margin-left: 10px;"></span>Animals
+        <ul>
+          <li> <a href=" doggo.html"> Doggos </a> </li>
+          <li> <a href="cats.html"> Cats </a> </li>
+          <li> <a id="lastA"> Others </a> </li>
+        </ul>
+      </li>
+      <li> <a> Things </a> </li>
+    </ul>
+  </nav>
+</main>
+
+
+</body>
+</html>
