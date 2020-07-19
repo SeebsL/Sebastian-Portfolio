@@ -11,36 +11,58 @@
   <link href="https://fonts.googleapis.com/css?family=Bangers|Carter+One&display=swap" rel="stylesheet">
 
 <style>
+
   body {
     background-color: rgba(181, 166, 193, 0.2);
   }
+
   a {
+
     text-align: center;
     width: 65px;
     height: 50px;
     color: #a497b3;
     text-shadow: 2px 1px 1px rgb(220, 195, 110);
-    background-color: whitesmoke;
+    cursor: pointer;
+
   }
 
   header {
     text-align: center;
   }
+
   header h1 {
     color: #a497b3;
     text-shadow: 2px 1px 1px rgb(220, 195, 110);
   }
+
   .carousel {
     width: 1300px;
     margin: auto 10px;
     border: solid 30px #a497b3;
   }
+
+  /* Query for iframe */
+  @media only screen and ( max-width: 1075px) {
+
+    .carousel {
+      width: 1000px;
+    }
+
+
+  } /* end media query*/
+
   section{
     display:flex;
     justify-content: center;
     flex-flow: wrap row;
     text-align: center;
   }
+
+  .arrow:before {
+  content: "\2190" ;
+  }
+
 </style>
 
   <script
@@ -86,8 +108,7 @@
 
 <body>
 <header>
-
-  <h1> Doggos </h1>
+  <span id="back"> <a href="index.html"><h1><span class="arrow"></span>Back</h1></a></span> <h1 style=" padding-left: 50px"> Doggos </h1>
   <h4> Enjoy our variety of Doggo pictures</h4>
 </header>
 

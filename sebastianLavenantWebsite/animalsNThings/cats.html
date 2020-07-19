@@ -13,15 +13,28 @@
   <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
 
 <style>
+
   body{
     text-align: center;
     background-color: rgba(181, 166, 193, 0.2);
   }
-  header h1 {
+
+  header {
+    display: flex;
+    justify-content: start;
+    flex-flow: row ;
+
+  }
+
+  h1 {
     color: #a497b3;
     text-shadow: 2px 1px 1px rgb(220, 195, 110);
   }
-  a{
+
+
+
+  div a {
+
     display: inline-block;
     position: relative;
     height: 200px;
@@ -29,14 +42,14 @@
 
   }
 
-   .cat-photo{
+   .cat-photo {
     width: 200px;
     height: 200px;
     display: inline;
   }
 
 
-  .photoOverlay{
+  .photoOverlay {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,7 +64,9 @@
     bottom: 0;
   }
 
-
+  .arrow:before {
+    content: "\2190" ;
+  }
 
 </style>
 
@@ -64,11 +79,16 @@
 </head>
 <body>
 <header>
-  <h1> Cats</h1>
+  <span id="back" > <a href="index.html"> <h1><span class="arrow"></span>Back</h1> </a></span>
+
+</header>
+
+<h1> Cats</h1>
+
   <h3>
 Please enjoy our fine selection of Cats
   </h3>
-</header>
+
 <div>
   <a href="images/cats/cat1.jpg" class="photoLink" data-lightbox="cats" data-title="A fine cat"><span class="photoOverlay">CLICK</span><img class="cat-photo" src="images/cats/cat1.jpg"></a>
   <a href="images/cats/cat2.jpg" class="photoLink" data-lightbox="cats" data-title="Well clicked good person!"><span class="photoOverlay">CLICK</span><img class="cat-photo" src="images/cats/cat2.jpg"></a>
@@ -80,7 +100,7 @@ Please enjoy our fine selection of Cats
 
 </div>
 
-<p> Brought to you by: <span style="font-family: 'Anton', sans-serif; color: white; background-color: black; padding: 3px;"> LIGHTBOX </span>  </p>
+<p> Brought to you by: <span style="font-family: 'Anton', sans-serif; color: white; background-color: black; padding: 3px;"> LIGHTBOX </span> </p>
 
 </body>
 

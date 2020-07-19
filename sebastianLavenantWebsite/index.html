@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> Sebastian Lavenant</title>
+  <title>Sebastian Lavenant</title>
   <link href="https://fonts.googleapis.com/css?family=Hepta+Slab|Inconsolata|Playfair+Display&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
 
@@ -132,6 +132,8 @@
 
   #hand {
    position: absolute;
+   left: 120px;
+   bottom: 35%;
   }
 
   .resume-div {
@@ -165,6 +167,12 @@
     justify-self: stretch;
   }
 
+  @media only screen and ( max-width: 1300px){
+    #hand {
+      display: none;
+    }
+
+  }
 </style>
 
 <script
@@ -177,9 +185,24 @@
     integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
     crossorigin="anonymous"></script>
 
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 <script>
 
-$(window).ready( function(){
+$(document).ready( function(){
+
+    // Animation for hand
+    function slideBack() {
+        $('#hand').animate({left: "120px"},1000);
+    }
+
+    setInterval( function(){
+
+        $('#hand').animate({left: "0px"}, 1000, slideBack());
+
+    }, 2000); // end setInterval()
+
     // initialize accordion widget
     $('#accordion').accordion({
         heightStyle: "content",
@@ -248,12 +271,12 @@ $(window).ready( function(){
 
     <p id="intro-p" class="intro">
       Sebastian is from Chula Vista,CA,USA. He is a thoughtful and creative person.
-      He dedicates most of his time pursuing a Bachelors degree in Sociology at the University of California, Merced and learning about Web-Development.
-      On his off time he enjoys <abbr title="Soccer, Weight lifitng, Calisthenics"> <b>physical activities</b></abbr>, <abbr title="Total War: Empire, Battlefield 3"><b> Video Games</b> </abbr> , and<abbr title="A Song of Ice and Fire, The Inheritance Cycle, Elementary Forms of Religion, Everything is F**ked" > <b>Reading</b></abbr> to name a few things.
+      He dedicates most of his time pursuing full-time employment as an appointment-setter and learning about Web-Development.
+      On his off time he enjoys <abbr title="Soccer, Weight lifitng, Calisthenics"> <b>physical activities</b></abbr>, <abbr title="Total War: Empire, Battlefield 3"><b> Video Games</b> </abbr> , and <abbr title="A Song of Ice and Fire, The Inheritance Cycle, Elementary Forms of Religion, Everything is F**ked" > <b>Reading</b></abbr> to name a few things.
     </p>
 
     <aside class="intro" style="text-align: center"> Feel welcome to browse his portfolio and resume information.</aside>
-    <p id="hand" class="far fa-hand-point-left fa-4x"></p>
+    <p id="hand" class="far fa-hand-point-left fa-4x intro"></p>
 
       <!-- accordion widget -->
       <div id="accordion" class="resume-div">
@@ -262,7 +285,7 @@ $(window).ready( function(){
         <div>
           <p class="western"><span style="font-size: large;"><strong>-</strong></span><span style="font-size: large;"> High school Diploma (class of 2015)</span></p>
           <p class="western">&nbsp;</p>
-          <p class="western"><span style="font-size: large;"><strong>-</strong></span><span style="font-size: large;"> Sociology B.A. in progress, </span><span style="font-size: large;"><strong>University of California, Merced, 5</strong></span><sup><span style="font-size: large;"><strong>th</strong></span></sup><span style="font-size: large;"><strong> Year</strong></span></p>
+          <p class="western"><span style="font-size: large;"><strong>-</strong></span><span style="font-size: large;"> Sociology B.A. </span><span style="font-size: large;"><strong>University of California, Merced, 5</strong></span><sup><span style="font-size: large;"><strong>th</strong></span></sup><span style="font-size: large;"><strong> Year</strong></span></p>
 
           <p class="western"><span style="font-size: x-large;"><u><strong>Relevant Classes</strong></u></span></p>
 
@@ -339,7 +362,7 @@ $(window).ready( function(){
           <p class="western">&nbsp;</p>
         </div>
 
-        <h3><u><strong>Languages </strong></u></h3>
+        <h3><u><strong>Languages/Certificates </strong></u></h3>
         <div>
           <p class="western"><span style="font-size: x-large;">-</span><span style="font-size: large;"> Spanish</span></p>
           <p class="western"><span style="font-size: large;"><strong>- </strong></span><span style="font-size: large;">English</span></p>
@@ -350,10 +373,45 @@ $(window).ready( function(){
           <p class="western"><span style="font-size: large;">-CPR Certification (Presentable upon request)</span></p>
         </div>
 
+        <h3><u><strong> Availability</strong></u></h3>
+        <div>
+          <p class="western"><span style="font-size: x-large;"></span><span style="font-size: large;">
+
+            <strong>Monday: </strong> 8am-6pm
+            <br>
+            <br>
+            <strong>Tuesday: </strong> 8am - 11am
+            <br>
+            <br>
+            <strong>Wednesday: </strong> 8am-6pm
+            <br>
+            <br>
+            <strong>Thursday: </strong> 8am - 11am
+            <br>
+            <br>
+            <strong>Friday: </strong> All day Available
+            <br>
+            <br>
+            <strong>Saturday: </strong> All day available
+            <br>
+            <br>
+            <strong>Sunday: </strong> All day available
+
+          </span></p>
+
+        </div>
+
+
 
     </div>
 
     <div id="iframe-container"> </div>
+
+    <div id="contact-info" class="intro" style="text-align: center; padding-top: 70px;">
+      <h3 style="margin-bottom: 10px;"> Contact me with any inquiries or to send cat memes:</h3>
+      <h4 style="margin: 0;"> email: s.lavenant501@gmail.com </h4>
+
+    </div> <!---- end contact-info ------------>
 
   </div>
 
@@ -376,7 +434,8 @@ $(window).ready( function(){
 
   </div>
 
-</div>
+</div> <!-- ====== end outer ====== -->
 
 </body>
+
 </html>
